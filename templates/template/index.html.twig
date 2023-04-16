@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Šablony{% endblock %}
+
+{% set page = 'templates' %}
+
+{% block body %}
+    <h1>Šablony</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Předmět</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for template in templates %}
+                <tr>
+                    <td>{{ template.label }}</td>
+                    <td>{{ template.subject }}</td>
+                    <td class="d-flex">
+                        <a href="{{ path('template_edit', {'id': template.id}) }}"
+                           class="btn btn-primary me-1">upravit</a>
+                        {{ include('template/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">žádné položky</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('template_new') }}" class="btn btn-primary">Vytvořit</a>
+{% endblock %}

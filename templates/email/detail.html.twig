@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail emailu{% endblock %}
+
+{% set page = 'email' %}
+
+{% block body %}
+    <h1>Detail emailu</h1>
+    <strong>Odesláno:</strong> {{ email.timeCreated|date('d.m.Y') }}
+    <hr>
+    <strong>Komu:</strong> {{ email.recipient }}
+    <hr>
+    <strong>Předmět:</strong> {{ email.subject }}
+    <hr>
+    {{ email.body|raw }}
+    <hr>
+{% endblock %}

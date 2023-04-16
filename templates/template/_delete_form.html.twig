@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('template_delete', {'id': template.id}) }}"
+      onsubmit="return confirm('Smazat?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ template.id) }}">
+    <button class="btn btn-danger">smazat</button>
+</form>

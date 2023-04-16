@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nová šablona{% endblock %}
+
+{% set page = 'templates' %}
+
+{% block body %}
+    <h1>Nová šablona</h1>
+    {{ include('template/_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emaily{% endblock %}
+
+{% set page = 'email' %}
+
+{% block body %}
+    <h1>Emaily</h1>
+    <a href="{{ path('email_new') }}" class="btn btn-primary">Nový</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Adresát</th>
+                <th>Předmět</th>
+                <th>Datum odeslání</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for email in emails %}
+                <tr>
+                    <td>{{ email.recipient }}</td>
+                    <td>{{ email.subject }}</td>
+                    <td>{{ email.timeCreated|date('d.m.Y') }}</td>
+                    <td class="d-flex">
+                        <a href="{{ path('email_detail', {'id': email.id}) }}"
+                           class="btn btn-primary me-1">zobrazit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">žádné položky</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

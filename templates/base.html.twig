@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -14,6 +12,42 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                {% if type == 'error' %} {% set type = 'danger' %} {% endif %}
+                <div class="alert alert-{{ type }}">
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('app_homepage') }}">Mailer</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link {{ page|default == 'templates' ? 'active text-decoration-underline' : '' }}"
+                               href="{{ path('template_index') }}">Šablony</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ page|default == 'email' ? 'active text-decoration-underline' : '' }}"
+                               href="{{ path('email_index') }}">Emaily</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

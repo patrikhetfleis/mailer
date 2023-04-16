@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success">{{ button_label|default('Uložit') }}</button>
+    <a href="{{ path('template_index') }}" class="btn btn-warning">Zrušit</a>
+{{ form_end(form) }}
